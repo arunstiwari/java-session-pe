@@ -3,6 +3,7 @@ package com.sapient.service;
 import com.sapient.model.Employee;
 import com.sapient.repository.EmployeeRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 public class EmployeeService {
@@ -20,5 +21,10 @@ public class EmployeeService {
 
     public void addEmployee(Employee employee){
         repository.addEmployee(employee);
+    }
+
+    public static <T> T addAndGet(T element, Collection<T> collection){
+        collection.add(element);
+        return element;
     }
 }
