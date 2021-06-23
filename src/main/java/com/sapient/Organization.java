@@ -8,6 +8,7 @@ import com.sapient.model.Employee;
 import com.sapient.model.Admin;
 import com.sapient.model.Vendor;
 import com.sapient.service.EmployeeService;
+import com.sapient.thread.MyThread;
 
 import java.sql.PreparedStatement;
 import java.util.*;
@@ -15,6 +16,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class Organization {
 
@@ -68,6 +70,27 @@ public class Organization {
 //            e.printStackTrace();
 //        }
 
+//        MyThread thread = new MyThread();
+//        Thread t = new Thread(thread);
+//        t.start();
+
+        Runnable r = () -> {
+            System.out.println("MyThread class run method");
+            try {
+                String name = Thread.currentThread().getName();
+                System.out.println("name = " + name);
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("MyThread is finished");
+        };
+        Thread t1 = new Thread(r);
+        t1.start();
+
+        Thread t2 = new Thread(r);
+        t2.start();
+
 
         Employee employee1 = new Employee("emp1", "name1", 21);
         List<Employee> employees = new ArrayList<>();
@@ -110,9 +133,53 @@ public class Organization {
         Predicate<String> startsWithBandEndsWithA = (value) -> startsWithB.test(value) && endsWithA.test(value);
 
 
+        Optional<Employee> first = Stream.of(employeesL)
+                .filter((value) -> value.getAge() > 24)
+                .findFirst();
+        Employee employee4 = first.get();
+        System.out.println("employee4 = " + employee4);
 
+//               .map((value) -> {
+//                    System.out.println("value = " + value);
+//                     String aCase = value.getName().toUpperCase();
+//                    value.setName(aCase);
+//                    return value;
+//                })
+//               .forEach( (value) -> System.out.println("value in foreach = " + value));
+//        System.out.println("count = " + count);
+
+//        Stream.of(employeesL).map(addThree1)
+//        while (true){
+//
+//        }
 
     }
+
+
+
+
+   private static Employee[] employeesL = {
+            new Employee("123", "Emp1", 24),
+           new Employee("456", "Emp2", 44),
+           new Employee("167", "Emp3", 34),
+   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -46,4 +46,8 @@ public class Employee {
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
