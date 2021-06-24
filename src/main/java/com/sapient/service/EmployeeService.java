@@ -11,8 +11,12 @@ public class EmployeeService {
     private EmployeeRepository repository = new EmployeeRepository();
 
 
-    public Employee getEmployee(String name){
-        return repository.getEmployee(name);
+    public Employee getEmployee(String name) {
+        Employee employee = repository.getEmployee(name);
+        if (employee ==null){
+            throw new EmployeeNotFoundException("Employee with name "+ name+ "Does not exist");
+        }
+        return employee;
     }
 
     public List<Employee> getAllEmployees() {
