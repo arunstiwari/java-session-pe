@@ -1,6 +1,7 @@
 package com.sapient.service;
 
 import com.sapient.model.Employee;
+import com.sapient.repository.DepartmentRepository;
 import com.sapient.repository.EmployeeRepository;
 
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.List;
 public class EmployeeService {
 
     private EmployeeRepository repository;
+    private DepartmentRepository departmentRepository;
 
     public EmployeeService(EmployeeRepository repository) {
         this.repository = repository;
@@ -16,7 +18,9 @@ public class EmployeeService {
 
     public Employee getEmployee(String name) {
         Employee employee = repository.getEmployee(name);
+
         if (employee ==null){
+            repository.fetchAllEmployees();
             throw new EmployeeNotFoundException("Employee with name "+ name+ " does not exist");
         }
         return employee;
