@@ -6,8 +6,15 @@ public class ObserverSimulator {
         //Observer observing the subject
         SimpleSubject simpleSubject = new SimpleSubject();
 
-        SimpleObserver observer = new SimpleObserver(simpleSubject);
+        SimpleObserver observer = new SimpleObserver("observer1");
+        simpleSubject.addPropertyChangeListener(observer);
+        SimpleObserver observer1 = new SimpleObserver("observer2");
+        simpleSubject.addPropertyChangeListener(observer1);
         simpleSubject.setValue(45);
+
+        simpleSubject.setValue(55);
+
+//        System.out.println(observer.getValue());
 
     }
 }

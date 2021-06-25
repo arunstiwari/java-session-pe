@@ -1,28 +1,24 @@
 package com.sapient.observer;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Observable;
-import java.util.Observer;
 
-public class SimpleObserver implements Observer {
+public class SimpleObserver implements PropertyChangeListener {
     private int value;
-    private Observable observable;
+    private String name;
 
-    public SimpleObserver(Observable observable) {
-        this.observable = observable;
+    public SimpleObserver(String name) {
+        this.name = name;
     }
 
-
-
     @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("arg = " + arg);
+    public void propertyChange(PropertyChangeEvent evt) {
+        this.value = (int) evt.getNewValue();
+        System.out.println(name+ " New event occured ---"+this.value);
+    }
 
-        this.value = (int) arg;
-        System.out.println("The new value : "+this.value);
-        if ( o instanceof SimpleSubject){
-            SimpleSubject simpleSubject = (SimpleSubject) o;
-            System.out.println(simpleSubject.getValue());
-        }
-
+    public int getValue() {
+        return value;
     }
 }
