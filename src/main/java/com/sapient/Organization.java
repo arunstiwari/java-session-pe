@@ -3,13 +3,12 @@ package com.sapient;
 import com.sapient.calculator.AddThree;
 import com.sapient.calculator.IPriceCalculator;
 import com.sapient.calculator.IPriceCalculatorImpl;
-import com.sapient.model.Department;
-import com.sapient.model.Employee;
-import com.sapient.model.Admin;
-import com.sapient.model.Vendor;
+import com.sapient.model.*;
+import com.sapient.repository.EmployeeRepository;
 import com.sapient.service.EmployeeService;
 import com.sapient.thread.MyThread;
 
+import java.io.*;
 import java.sql.PreparedStatement;
 import java.util.*;
 import java.util.function.Consumer;
@@ -20,9 +19,10 @@ import java.util.stream.Stream;
 
 public class Organization {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
-        EmployeeService employeeService = new EmployeeService();
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        EmployeeService employeeService = new EmployeeService(employeeRepository);
         Employee employee = new Employee("EMP-123", "Name-1",24);
         employeeService.addEmployee(employee);
         Map<String, Employee> employeeMap = new HashMap<>();
@@ -152,6 +152,19 @@ public class Organization {
 //        while (true){
 //
 //        }
+//        Employee employee6 = new Employee("")
+         Employee employee5 = EmployeeBuilder.anEmployee()
+                                    .withAge(34)
+                                    .withEmployeeId("abc")
+                                    .withName("cde")
+
+//                                    .withProject("")
+                                    .build();
+
+         File file;
+         InputStream inputStream = new BufferedInputStream( new FileInputStream("file.txt"));
+
+
 
     }
 

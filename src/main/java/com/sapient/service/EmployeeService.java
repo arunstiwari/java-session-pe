@@ -8,13 +8,16 @@ import java.util.List;
 
 public class EmployeeService {
 
-    private EmployeeRepository repository = new EmployeeRepository();
+    private EmployeeRepository repository;
 
+    public EmployeeService(EmployeeRepository repository) {
+        this.repository = repository;
+    }
 
     public Employee getEmployee(String name) {
         Employee employee = repository.getEmployee(name);
         if (employee ==null){
-            throw new EmployeeNotFoundException("Employee with name "+ name+ "Does not exist");
+            throw new EmployeeNotFoundException("Employee with name "+ name+ " does not exist");
         }
         return employee;
     }
